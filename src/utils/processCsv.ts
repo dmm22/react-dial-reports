@@ -1,9 +1,3 @@
-interface Campaign {
-  campaign: string
-  disposition: string
-  calls: number
-}
-
 const processCsv = (csv: string) => {
   const json = csv
     .split("\n")
@@ -54,7 +48,21 @@ const processCsv = (csv: string) => {
     campaignStats[campaign]["calls"] += parseInt(calls)
   })
 
-  console.log(campaignStats)
+  return Object.entries(campaignStats)
+    .map((el: [string, any]) => {
+      return [el[0], ...Object.values(el[1])]
+    })
+    .map((arr: any) => {
+      const connectRate = `${(arr[3] === 0
+        ? 0
+        : (arr[2] / arr[3]) * 100
+      ).toFixed(1)}%`
+      const conversationRate = `${(arr[2] === 0
+        ? 0
+        : (arr[1] / arr[2]) * 100
+      ).toFixed(1)}%`
+      return [...arr, connectRate, conversationRate]
+    })
 }
 
 export default processCsv

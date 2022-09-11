@@ -69,11 +69,4 @@ const testData = [
   ["Suncoast Chrysler Dodge Jeep Ram Positive Equity OBS", 1, 3, 18],
 ]
 
-// campaign, appointments, connections, calls
-// connect rate = connections/dials
-// conversion rate = appts / connections
-const result = testData.map(arr => {
-  const connectRate = arr[2] / arr[3]
-  const conversationRate = arr[1] / arr[2]
-  return [...arr, connectRate, conversationRate]
-})
+export default testData

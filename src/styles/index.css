@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
+  color: #212529;
+}
+
+body {
+  background: #edf2f9;
+}
