@@ -1,0 +1,12 @@
+.SignInButton {
+  align-self: center;
+  padding: 0.6rem 1.2rem;
+  background: #ff8500;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color: white;
+  margin-left: 2rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}

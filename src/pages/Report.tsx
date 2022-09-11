@@ -3,6 +3,10 @@ import getCsvResponse from "../adapters/getCsvResponse"
 import testData from "../data/testData"
 import processCsv from "../utils/processCsv"
 import classes from "../styles/Report.module.css"
+import getTotals from "../utils/getTotals"
+import useSearchResults from "../hooks/useSearchResults"
+import { useIsAuthenticated } from "@azure/msal-react"
+import { useMsal } from "@azure/msal-react"
 
 export type Data = (
   | string
@@ -14,26 +18,47 @@ export type Data = (
 )[][]
 
 const Report = () => {
-  const [data, setData] = useState<any>(testData)
+  const [data, setData] = useState<any>()
+  const [csvData, setCsvData] = useState()
+  const [showTotals, setShowTotals] = useState(false)
+  const [totals, setTotals] = useState<any>()
+
+  const isAuthenticated = useIsAuthenticated()
+
+  const { accounts } = useMsal()
 
   useEffect(() => {
+    console.log(accounts[0].username)
     handleRequest()
   }, [])
 
   const handleRequest = async () => {
-    const csv = await getCsvResponse()
+    const csv: any = await getCsvResponse(accounts[0].username)
+    console.log(csv)
+    setCsvData(csv)
     if (typeof csv === "string") {
       const json = processCsv(csv)
-      console.log(json)
+      setTotals(getTotals(json))
       json && setData(json)
     }
   }
 
-  const headers = ["Campaign Name", "appointments", "Connections", "Dials"]
-
   return (
     <div className={classes.report}>
-      {/* {data && <pre>{JSON.stringify(data, null, 2)}</pre>} */}
+      <button
+        disabled={totals === undefined}
+        onClick={() =>
+          alert(
+            `Hertz/Grand total seem to be incorrect. Ignore those for now\n\n${JSON.stringify(
+              totals,
+              null,
+              2
+            )}`
+          )
+        }
+      >
+        Show Totals
+      </button>
       <div className={classes.table}>
         <div className={`${classes.row} ${classes.headers}`}>
           <div className={`${classes.cell} ${classes.campaignName}`}>

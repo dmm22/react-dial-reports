@@ -37,3 +37,21 @@
 .headers > div {
   font-weight: 500;
 }
+
+.report > button {
+  background: #4679cc;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0.7rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-left: 4vw;
+  margin-bottom: 1rem;
+}
+
+.report > button:hover {
+  background: #406db5;
+}

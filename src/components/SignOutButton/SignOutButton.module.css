@@ -1,0 +1,10 @@
+.SignOutButton {
+  align-self: center;
+  padding: 0.45rem 1.2rem;
+  background: #ced4da;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color: #393d3f;
+  margin-left: 2rem;
+}
